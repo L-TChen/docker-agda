@@ -1,6 +1,6 @@
 # Agda Docker Images on Apline Linux 
 
-This is the Git repo of the [Docker (Unofficial) Image"] for [`Agda`](https://hub.docker.com/repository/docker/ltchentw/agda/general). These Docker images are particularly useful for artefact evaluation.
+This is the Git repo of (the Dockerfiles for building) [Docker (Unofficial) Image](https://hub.docker.com/r/ltchentw/agda) for [`Agda`](https://hub.docker.com/repository/docker/ltchentw/agda/general).
 
 ## Image Details
 
