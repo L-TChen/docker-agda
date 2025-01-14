@@ -21,7 +21,7 @@ This is the Git repo of (the Dockerfiles for building) [Docker (Unofficial) Imag
 You can run the images locally without building:
 
 ```bash
-$ docker run -it ltchentw/agda:2.6.4.1
+$ docker run -it ltchentw/agda:2.7.0.1
 ```
 
 ### Building + Running Locally
@@ -29,5 +29,5 @@ $ docker run -it ltchentw/agda:2.6.4.1
 If uncertain, you can build an image yourself and run the image locally:
 
 ```bash
-$ docker build -t agda 2.6.4.1 && docker run -it agda
+$ docker build -t agda 2.7.0.1 && docker run -it agda
 ```
