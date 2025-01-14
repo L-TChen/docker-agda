@@ -16,7 +16,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [2.6.4.1/Dockerfile]
+        dockerfile:
+          - 2.7.0.1/Dockerfile
+          - 2.7.0.1/no-emacs/Dockerfile
+          - 2.6.4.1/Dockerfile
+          - 2.6.4.1/Dockerfile
         platform:
           - linux/amd64
           - linux/arm64
