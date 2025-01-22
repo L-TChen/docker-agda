@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Prepare
         run: |
-          docker=${{ matrix.docker }}
+          docker=${{ matrix.dockerfile }}
           echo "DOCKER=${docker//\//-}" >> $GITHUB_ENV
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
