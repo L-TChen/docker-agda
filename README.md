@@ -1,4 +1,4 @@
-# Agda Docker Images on Apline Linux 
+# Agda Docker Images on Alpine Linux 
 
 This is the Git repo of (the Dockerfiles for building) [Docker (Unofficial) Image](https://hub.docker.com/r/ltchentw/agda) for [`Agda`](https://hub.docker.com/repository/docker/ltchentw/agda/general).
 
