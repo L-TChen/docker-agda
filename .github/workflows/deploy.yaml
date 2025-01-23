@@ -7,7 +7,7 @@ on:
     types: [published]
 
 env:
-  REGISTRY_IMAGE: stefanovolpe/agda
+  REGISTRY_IMAGE: ltchentw/agda
 
 jobs:
   build:
