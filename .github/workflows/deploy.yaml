@@ -24,13 +24,11 @@ jobs:
         dockerfile:
           - 2.7.0.1/Dockerfile
           - 2.7.0.1/no-emacs/Dockerfile
-          - 2.6.4.3/Dockerfile
-          - 2.6.4.3/no-emacs/Dockerfile
-        include:
-          - os: ubuntu-latest
-            platforms: linux/amd64
-          - os: ubuntu-24.04-arm
-            platforms: linux/arm64
+          - 2.6.4.1/Dockerfile
+          - 2.6.4.1/no-emacs/Dockerfile
+        os:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
 
     runs-on: ${{ matrix.os }}
 
@@ -39,7 +37,7 @@ jobs:
         run: |
           docker=${{ matrix.dockerfile }}
           echo "DOCKER=${docker//\//-}" >> $GITHUB_ENV
-          platform=${{ matrix.platform }}
+          platform=${{ matrix.os }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
       - name: Check out the repo
@@ -67,7 +65,7 @@ jobs:
         if: ${{ github.event_name == 'release' }}
         with:
           context: .
-          platforms: ${{ matrix.platform }}
+          # platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           file: ${{ matrix.dockerfile }}
           push: true
@@ -78,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ matrix.platform }}
+          # platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           file: ${{ matrix.dockerfile }}
           push: false
