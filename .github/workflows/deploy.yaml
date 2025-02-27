@@ -2,7 +2,11 @@ name: Publish Docker image
 
 on:
   workflow_dispatch: null
-  create: null
+  push:
+    paths:
+      - '**/Dockerfile'
+    tags:
+      - v*
   release:
     types: [published]
 
@@ -23,7 +27,7 @@ jobs:
           - os: ubuntu-latest
             platforms: linux/amd64
             dockerfile: 2.7.0.1/Dockerfile
-          - os: macos-latest
+          - os: ubuntu-24.04-arm
             platforms: linux/arm64
             dockerfile: 2.7.0.1/Dockerfile
 
@@ -51,7 +55,7 @@ jobs:
       
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
-        if: ${{ github.event_name == 'release' || github.event_name == 'create' }}
+        if: ${{ github.event_name == 'release' }}
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWD }}
@@ -59,7 +63,7 @@ jobs:
       - name: Build and push by digest
         id: build
         uses: docker/build-push-action@v5
-        if: ${{ github.event_name == 'release' || github.event_name == 'create' }}
+        if: ${{ github.event_name == 'release' }}
         with:
           context: .
           platforms: ${{ matrix.platform }}
@@ -71,7 +75,6 @@ jobs:
       - name: Build by digest
         id: build-only
         uses: docker/build-push-action@v5
-        if: ${{ github.event_name == 'workflow_dispatch' }}
         with:
           context: .
           platforms: ${{ matrix.platform }}
@@ -88,7 +91,7 @@ jobs:
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
-        if: ${{ github.event_name == 'release' || github.event_name == 'create' }}
+        if: ${{ github.event_name == 'release' }}
         with:
           name: digests-${{ env.DOCKER }}-${{ env.PLATFORM_PAIR }}
           path: /tmp/digests/*
@@ -97,7 +100,7 @@ jobs:
 
   merge:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'release' || github.event_name == 'create' }}
+    if: ${{ github.event_name == 'release' }}
     needs:
       - build
     steps:
