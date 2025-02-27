@@ -21,17 +21,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-#        dockerfile: [2.7.0.1/Dockerfile]
-#          - 2.7.0.1/no-emacs/Dockerfile
-#          - 2.6.4.1/Dockerfile
-#          - 2.6.4.1/no-emacs/Dockerfile
+        dockerfile:
+          - 2.7.0.1/Dockerfile
+          - 2.7.0.1/no-emacs/Dockerfile
+          - 2.6.4.3/Dockerfile
+          - 2.6.4.3/no-emacs/Dockerfile
         include:
           - os: ubuntu-latest
             platforms: linux/amd64
-            dockerfile: 2.7.0.1/Dockerfile
           - os: ubuntu-24.04-arm
             platforms: linux/arm64
-            dockerfile: 2.7.0.1/Dockerfile
 
     runs-on: ${{ matrix.os }}
 
