@@ -21,8 +21,8 @@ RUN wget -qO- https://hackage.haskell.org/package/Agda-${PKG_VER}/Agda-${PKG_VER
 WORKDIR Agda-${PKG_VER}
 
 RUN cabal update
-RUN cabal build ${PKG_BUILD_FLAGS} --dependencies-only        "--ghc-options=+RTS -M6G -RTS" 
-RUN cabal build ${PKG_BUILD_FLAGS} --enable-executable-static "--ghc-options=+RTS -M6G -RTS" 
+RUN cabal build ${PKG_BUILD_FLAGS} --dependencies-only
+RUN cabal build ${PKG_BUILD_FLAGS} --enable-executable-static
 
 RUN mkdir -p /opt/agda/bin &&\
     find dist-newstyle/build \( -name 'agda' -o -name 'agda-mode' \) -type f -exec cp {} /opt/agda/bin \; &&\
