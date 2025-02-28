@@ -23,7 +23,7 @@ jobs:
       matrix:
         dockerfile:
           - Dockerfile
-          - Dockerfile
+          - no-emacs/Dockerfile
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
