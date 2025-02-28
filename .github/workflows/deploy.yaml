@@ -94,7 +94,6 @@ jobs:
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
-        if: ${{ matrix.docker == 'Dockerfile' }}
         with:
           images: |
             name=${{ env.REGISTRY_IMAGE }}
