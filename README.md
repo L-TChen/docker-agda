@@ -6,8 +6,8 @@ This is the Git repo of (the Dockerfiles for building) [Docker (Unofficial) Imag
 
 ### Included Tools
 
-* [Agda](https://agda.readthedocs.io/).
-* [Emacs](https://www.gnu.org/software/emacs/) for browsing Agda code.
+* [Agda](https://agda.readthedocs.io/)
+* [Emacs](https://www.gnu.org/software/emacs/) for browsing Agda code
 
 ### Processor Architecture Support
 
