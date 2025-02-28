@@ -13,7 +13,7 @@ RUN apk upgrade --no-cache &&\
 
 FROM base AS build
 
-ARG PKG_VER=2.7.0.1
+ARG PKG_VER=2.6.4.3
 ARG PKG_BUILD_FLAGS="--enable-split-sections -foptimise-heavily -fdebug"
 
 RUN wget -qO- https://hackage.haskell.org/package/Agda-${PKG_VER}/Agda-${PKG_VER}.tar.gz | tar xz
@@ -31,7 +31,7 @@ RUN mkdir -p /opt/agda/bin &&\
 
 FROM alpine:latest AS final
 
-ARG STDLIB_VER=2.2
+ARG STDLIB_VER=2.1
 
 COPY --from=build /opt/ /opt/
 

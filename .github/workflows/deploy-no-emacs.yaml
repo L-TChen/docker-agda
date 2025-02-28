@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Publish Docker image (without Emacs)
 
 on:
   workflow_dispatch: null
@@ -8,7 +8,7 @@ on:
       - v*
     paths:
       - 'Dockerfile'
-      - '.github/workflows/deploy.yaml'
+      - '.github/workflows/deploy-no-emacs.yaml'
     tags:
       - v*
   pull_request:
@@ -25,7 +25,7 @@ jobs:
       fail-fast: true
       matrix:
         docker:
-          - Dockerfile
+          - no-emacs/Dockerfile
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
@@ -42,8 +42,10 @@ jobs:
         with:
           images: |
             name=${{ env.REGISTRY_IMAGE }}
+          flavor: |
+            latest=false
+            suffix=-no-emacs
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
             type=ref,event=branch,enable=${{ github.ref != format('refs/heads/{0}', 'master') }}
             type=ref,event=pr
             type=match,pattern=v(.*),group=1
@@ -102,8 +104,10 @@ jobs:
         with:
           images: |
             name=${{ env.REGISTRY_IMAGE }}
+          flavor: |
+            latest=false
+            suffix=-no-emacs
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
             type=ref,event=branch,enable=${{ github.ref != format('refs/heads/{0}', 'master') }}
             type=ref,event=pr
             type=match,pattern=v(.*),group=1
