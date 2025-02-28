@@ -22,10 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         dockerfile:
-          - 2.7.0.1/Dockerfile
-          - 2.7.0.1/no-emacs/Dockerfile
-          - 2.6.4.1/Dockerfile
-          - 2.6.4.1/no-emacs/Dockerfile
+          - Dockerfile
+          - Dockerfile
         os:
           - ubuntu-latest
           - ubuntu-24.04-arm
@@ -62,24 +60,12 @@ jobs:
       - name: Build and push by digest
         id: build
         uses: docker/build-push-action@v5
-        if: ${{ github.event_name == 'release' }}
         with:
           context: .
           # platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           file: ${{ matrix.dockerfile }}
           push: true
-          outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true
-
-      - name: Build by digest
-        id: build-only
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          # platforms: ${{ matrix.platform }}
-          labels: ${{ steps.meta.outputs.labels }}
-          file: ${{ matrix.dockerfile }}
-          push: false
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true
 
       - name: Export digest
@@ -90,7 +76,6 @@ jobs:
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
-        if: ${{ github.event_name == 'release' }}
         with:
           name: digests-${{ env.DOCKER }}-${{ env.PLATFORM_PAIR }}
           path: /tmp/digests/*
@@ -99,7 +84,6 @@ jobs:
 
   merge:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'release' }}
     needs:
       - build
     steps:
