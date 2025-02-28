@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - master
-      - v*
     paths:
       - 'Dockerfile'
       - '.github/workflows/deploy.yaml'
@@ -76,7 +75,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ matrix.docker }}-${{ matrix.os }}
+          name: digests-${{ matrix.os }}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
