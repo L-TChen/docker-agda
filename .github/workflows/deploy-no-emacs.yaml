@@ -3,10 +3,8 @@ name: Publish Docker image (without Emacs)
 on:
   workflow_dispatch: null
   push:
-    branches:
-      - master
     paths:
-      - 'Dockerfile'
+      - 'no-emacs/Dockerfile'
       - '.github/workflows/deploy-no-emacs.yaml'
     tags:
       - v*
